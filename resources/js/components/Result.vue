@@ -1,43 +1,36 @@
 <template>
     <div class="flex-center position-ref">
         <div class="content">
-            <div class="title m-b-md">
-                {{ title }}
-            </div>
-            <div class="links">
-                <a href="https://laravel.com/docs">View Laravel Docs</a>
-                <a href="https://vuejs.org/v2/guide/">View Vue Docs</a>
-                <a href="https://laracasts.com">Watch Videos</a>
+            <div class="m-b-md">
+                <li v-for="(message, index) in messageList" :item="message" :key="index">
+                    {{ message }}
+                </li>
             </div>
         </div>
     </div>
 </template>
 <script>
     export default {
-        name: 'Welcome',
+        name: 'Result',
         props: {
-            title: ''
+            msg: {
+                type: String
+            }
         },
         components: {},
         data() {
-            return {}
+            return {
+                messageList: []
+            }
+        },
+        watch: {
+            msg: function() {
+                this.messageList.push(this.msg)
+            }
         }
     }
 </script>
 <style scoped>
-    html, body {
-        background-color: #fff;
-        color: #636b6f;
-        font-family: 'Raleway', sans-serif;
-        font-weight: 100;
-        height: 100vh;
-        margin: 0;
-    }
-
-    .full-height {
-        height: 100vh;
-    }
-
     .flex-center {
         align-items: center;
         display: flex;
