@@ -52,7 +52,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Sanya Thammawong</a>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="#" @click.prevent="$auth.logout()">Logout</a>
                             </div>
                         </li>                 
                     </ul>
@@ -77,9 +77,7 @@
 
     export default {
         name: 'App',
-        props: [
-            'isAuth'
-        ],
+        props: [],
         components: {
             NumberDisplay,
             NumberSubmit

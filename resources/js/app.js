@@ -21,6 +21,7 @@ Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 
 axios.defaults.baseURL = 'http://localhost:8000/api';
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -89,7 +90,7 @@ const router = new VueRouter({
 			meta: {
 				auth: false
 			}
-		}
+		},
 	],
 });
 

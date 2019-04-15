@@ -4,6 +4,7 @@
             <p>There was an error, unable to sign in with those credentials.</p>
         </div>
 
+        sanyath007@gmail.com
         <form autocomplete="off" @submit.prevent="login" method="post">
             <div class="form-group">
                 <label for="email">Email</label>
@@ -40,7 +41,7 @@
                     error: function() {},
                     rememberMe: true,
                     redirect: '/dashboard',
-                    fetchUser: true,
+                    fetchUser: false,
                 })
             }
         }

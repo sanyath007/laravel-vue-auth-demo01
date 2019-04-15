@@ -3071,7 +3071,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
-  props: ['isAuth'],
+  props: [],
   components: {
     NumberDisplay: _NumberDisplay__WEBPACK_IMPORTED_MODULE_0__["default"],
     NumberSubmit: _NumberSubmit__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -3206,6 +3206,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3226,7 +3227,7 @@ __webpack_require__.r(__webpack_exports__);
         error: function error() {},
         rememberMe: true,
         redirect: '/dashboard',
-        fetchUser: true
+        fetchUser: false
       });
     }
   }
@@ -39557,7 +39558,40 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(2)
+                        _c(
+                          "div",
+                          {
+                            staticClass: "dropdown-menu",
+                            attrs: {
+                              "aria-labelledby": "navbarDropdownMenuLink"
+                            }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Sanya Thammawong")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.$auth.logout()
+                                  }
+                                }
+                              },
+                              [_vm._v("Logout")]
+                            )
+                          ]
+                        )
                       ])
                     : _vm._e()
                 ])
@@ -39647,27 +39681,6 @@ var staticRenderFns = [
         ]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "dropdown-menu",
-        attrs: { "aria-labelledby": "navbarDropdownMenuLink" }
-      },
-      [
-        _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-          _vm._v("Sanya Thammawong")
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-          _vm._v("Logout")
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -39819,7 +39832,7 @@ var render = function() {
           ])
         ])
       : _vm._e(),
-    _vm._v(" "),
+    _vm._v("\n\n    sanyath007@gmail.com\n    "),
     _c(
       "form",
       {
