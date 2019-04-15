@@ -2,39 +2,29 @@
     <div class="flex-center position-ref">
         <div class="content">
             <div class="title">{{ this.$root.$data.title }}</div>
-            This is About page.
-            <Input @inputData="updateMessage" />
-
-            <Result :msg=childData></Result>
-            
+            This is Contact page.
         </div>
     </div>
 </template>
 <script>
-    import Input from './Input'
-    import Result from './Result'
-
     export default {
-        name: 'About',
+        name: 'Contact',
         props: [
             'title'
         ],
-        components: {
-            Input,
-            Result
-        },
+        components: {},
         data() {
             return {
-                childData: ""
+                temMessage: ""
             }
         },
         mounted() {
-            this.$root.$data.title="About"
+            this.$root.$data.title="Contact"
         },
         methods: {
-            updateMessage(variable) {
-                console.log(variable)
-                this.childData = variable
+            submit: function() {
+                this.$emit("inputData", this.temMessage);
+                this.temMessage = "";
             }
         }
     }

@@ -11,14 +11,20 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
+                            <router-link :to="{name: 'home'}" class="nav-link">Home</router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link :to="{name: 'about'}" class="nav-link">About</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{name: 'about'}" class="nav-link">Contact</router-link>
+                            <router-link :to="{name: 'contact'}" class="nav-link">Contact</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link :to="{name: 'dashboard'}" class="nav-link">Dashboard</router-link>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
+                                Our Service
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Action</a>
@@ -29,44 +35,74 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <form class="form-inline">
+                        <!-- <form class="form-inline">
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                        <router-link :to="{name: 'about'}" class="nav-link">Admin</router-link>                        
+                        </form> -->
+                        <li class="nav-item" v-if="!$auth.check()">
+                            <router-link :to="{name: 'login'}" class="nav-link">Login</router-link>
+                        </li>
+                        <li class="nav-item" v-if="!$auth.check()">
+                            <router-link :to="{name: 'register'}" class="nav-link">Register</router-link>
+                        </li>
+                        <li class="nav-item dropdown" v-if="$auth.check()">
+                            <!-- <router-link :to="{name: 'about'}" class="nav-link">Admin</router-link> -->
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Sanya Thammawong</a>
+                                <a class="dropdown-item" href="#">Logout</a>
+                            </div>
+                        </li>                 
                     </ul>
                 </div>
             </div>
         </nav>
         <main class="py-4">
-            <router-view @inputData="updateMessage" :title="'Welcome'"></router-view>
-            <Result :msg=childData></Result>
+            <router-view @setTitle="changeTitle"></router-view>
+            {{ count }}
+
+            <!-- <div class="container">
+                <NumberDisplay></NumberDisplay>
+                <NumberSubmit></NumberSubmit>
+            </div> -->
         </main>
     </div>
 </template>
 
 <script>
-    import About from './About'
-    import Result from './Result'
+    import NumberDisplay from './NumberDisplay'
+    import NumberSubmit from './NumberSubmit'
 
     export default {
         name: 'App',
-        props: [''],
+        props: [
+            'isAuth'
+        ],
         components: {
-            About,
-            Result
+            NumberDisplay,
+            NumberSubmit
         },
         data() {
             return {
-                childData: ""
+
             }
         },
         mounted() {
             console.log('Component mounted.')
         },
+        computed: {
+            count() {
+                console.log(this.$store.state.counter)
+            }
+        },
         methods: {
-            updateMessage(variable) {
-                this.childData = variable
+            changeTitle(str) {
+                console.log(str)
+                console.log(this.$parent)
+                console.log(this.$root.$data)
+                this.$parent.title = str
             }
         }
     }

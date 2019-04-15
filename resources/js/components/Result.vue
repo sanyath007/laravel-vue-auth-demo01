@@ -1,6 +1,7 @@
 <template>
     <div class="flex-center position-ref">
         <div class="content">
+            <h1>Result :</h1>
             <div class="m-b-md">
                 <li v-for="(message, index) in messageList" :item="message" :key="index">
                     {{ message }}
@@ -22,6 +23,9 @@
             return {
                 messageList: []
             }
+        },
+        mounted() {
+        
         },
         watch: {
             msg: function() {

@@ -2,7 +2,9 @@
     <div class="flex-center position-ref">
         <div class="content">
             <div class="title m-b-md">
-                {{ title }}
+                {{ this.$root.$data.title }}
+
+                <button class="btn btn-primary" v-on:click="$emit('setTitle', 'Hello')">Change Title</button>
             </div>
             <div class="links">
                 <a href="https://laravel.com/docs">View Laravel Docs</a>
@@ -15,13 +17,16 @@
 <script>
     export default {
         name: 'Welcome',
-        props: {
-            title: ''
-        },
+        props: [
+            'title'
+        ],
         components: {},
         data() {
             return {}
-        }
+        },
+        mounted() {
+            this.$root.$data.title="Welcome"
+        },
     }
 </script>
 <style scoped>

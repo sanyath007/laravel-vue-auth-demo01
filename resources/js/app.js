@@ -12,9 +12,15 @@ import './bootstrap'
 // window.VueRouter = require('vue-router');
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
+Vue.use(Vuex)
+Vue.use(VueAxios, axios)
 
+axios.defaults.baseURL = 'http://localhost:8000/api';
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -29,6 +35,10 @@ Vue.use(VueRouter);
 import App from './components/App'
 import Welcome from './components/Welcome'
 import About from './components/About'
+import Contact from './components/Contact'
+import Dashboard from './components/Dashboard'
+import Login from './components/Login'
+import Register from './components/Register'
 
 // Vue.component('welcome', require('./components/Welcome.vue').default);
 
@@ -50,12 +60,77 @@ const router = new VueRouter({
 			path: '/about',
 			name: 'about',
 			component: About
+		},
+		{
+			path: '/contact',
+			name: 'contact',
+			component: Contact
+		},
+		{
+			path: '/dashboard',
+			name: 'dashboard',
+			component: Dashboard,
+			meta: {
+				auth: true
+			}
+		},
+		{
+			path: '/login',
+			name: 'login',
+			component: Login,
+			meta: {
+				auth: false
+			}
+		},
+		{
+			path: '/register',
+			name: 'register',
+			component: Register,
+			meta: {
+				auth: false
+			}
 		}
 	],
 });
 
+const store = new Vuex.Store({
+	state: {
+		counter: 0,
+		numbers: [1,2,3]
+	},
+	mutations: {
+		INCREMENT (state) {
+			state.counter++
+		},
+		ADD_NUMBER(state, payload) {
+			state.numbers.push(payload)
+		}
+	},
+	actions: {
+		addNumber(context, number) {
+			context.commit("ADD_NUMBER", number)
+		}
+	},
+	getters: {
+		getNumbers(state) {
+			return state.numbers
+		}
+	}
+})
+
+Vue.use(require('@websanova/vue-auth'), {
+	auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
+	http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+	router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js')
+})
+
 const app = new Vue({
     el: '#app',
-    components: { App },
-    router,
-});
+	components: { App },
+	data: {
+		title: "",
+		isAuth: false
+	},
+	router,
+	store,
+})
