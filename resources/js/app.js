@@ -15,12 +15,21 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueSocialAuth from 'vue-social-auth'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
+Vue.use(VueSocialAuth, {
+	providers: {
+		facebook: {
+			clientId: '369052130609711',
+			redirectUri: '/oauth/facebook/callback'
+		}
+	}
+})
 
-axios.defaults.baseURL = 'http://localhost:8000/api';
+// axios.defaults.baseURL = 'http://localhost:8000/api';
 
 /**
  * The following block of code may be used to automatically register your
@@ -91,6 +100,8 @@ const router = new VueRouter({
 				auth: false
 			}
 		},
+		// otherwise redirect to home
+		{ path: '*', redirect: '/' }
 	],
 });
 
@@ -119,18 +130,17 @@ const store = new Vuex.Store({
 	}
 })
 
-Vue.use(require('@websanova/vue-auth'), {
-	auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
-	http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
-	router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js')
-})
+// Vue.use(require('@websanova/vue-auth'), {
+// 	auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
+// 	http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+// 	router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js')
+// })
 
 const app = new Vue({
     el: '#app',
 	components: { App },
 	data: {
-		title: "",
-		isAuth: false
+		title: ""
 	},
 	router,
 	store,

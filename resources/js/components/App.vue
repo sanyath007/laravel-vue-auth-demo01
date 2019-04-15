@@ -39,20 +39,20 @@
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form> -->
-                        <li class="nav-item" v-if="!$auth.check()">
+                        <li class="nav-item">
                             <router-link :to="{name: 'login'}" class="nav-link">Login</router-link>
                         </li>
-                        <li class="nav-item" v-if="!$auth.check()">
+                        <li class="nav-item">
                             <router-link :to="{name: 'register'}" class="nav-link">Register</router-link>
                         </li>
-                        <li class="nav-item dropdown" v-if="$auth.check()">
+                        <li class="nav-item dropdown">
                             <!-- <router-link :to="{name: 'about'}" class="nav-link">Admin</router-link> -->
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Admin
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Sanya Thammawong</a>
-                                <a class="dropdown-item" href="#" @click.prevent="$auth.logout()">Logout</a>
+                                <a class="dropdown-item" href="#">Logout</a>
                             </div>
                         </li>                 
                     </ul>
@@ -61,7 +61,7 @@
         </nav>
         <main class="py-4">
             <router-view @setTitle="changeTitle"></router-view>
-            {{ count }}
+            <!-- {{ count }} -->
 
             <!-- <div class="container">
                 <NumberDisplay></NumberDisplay>

@@ -18,6 +18,22 @@
 
             <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Social login</div>
+                    <div class="panel-body">                
+                        <button class="btn btn-primary" @click="socialAuthProvider('facebook')">Login with Facebook</button>
+                        <button class="btn btn-danger" @click="socialAuthProvider('google')">Login with Google</button>
+                        <button class="btn btn-info" @click="socialAuthProvider('twitter')">Login with Twitter</button>
+                        <button class="btn btn-warning" @click="socialAuthProvider('github')">Login with Github</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
     </div>
 </template>
 <script>
@@ -28,6 +44,9 @@
                 password: null,
                 error: false
             }
+        },
+        mounted() {
+            console.log(this.$auth)
         },
         methods: {
             login() {
@@ -42,6 +61,23 @@
                     rememberMe: true,
                     redirect: '/dashboard',
                     fetchUser: false,
+                })
+            },
+            socialAuthProvider(provider) {
+                console.log(this.$auth)
+                var app = this
+                this.$auth.authenticate(provider).then(res => {
+                    console.log(res)
+                    this.socialLogin(provider, res)
+                }).catch(error => {
+                    console.log(error)
+                })
+            }, 
+            socialLogin(provider, res) {
+                this.$http.post('/oauth/' + provider, res).then(res => {
+                    console.log(res.data)
+                }).catch(error => {
+                    console.log(error)
                 })
             }
         }
