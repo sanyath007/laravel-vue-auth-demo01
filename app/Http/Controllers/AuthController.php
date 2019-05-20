@@ -34,9 +34,11 @@ class AuthController extends Controller
             ], 400);
         }
 
-        return response([
-            'status' => 'success'
-        ])->header('Authorization', $token);
+        // return response([
+        //     'status' => 'success'
+        // ])->header('Authorization', $token);
+        
+        return $this->respondWithToken($token);
     }
 
     public function logout()
@@ -49,18 +51,34 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function user(Request $request)
+    public function user()
     {
-        $user = User::find(Auth::user()->id);
+        if (! $token = \JWTAuth::parseToken()) {
+            //throw an exception
+            return response([
+                'error' => \JWTAuth::parseToken()
+            ]);
+        }
+        
+        $user = \JWTAuth::toUser($token);
         return response([
             'status' => 'success',
-            'data' => $user
+            'data' => $user,
         ]);
     }
     public function refresh()
     {
         return response([
             'status' => 'success'
+        ]);
+    }
+
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type'   => 'bearer',
+            'expires_in'   => auth()->factory()->getTTL() * 60
         ]);
     }
 }
