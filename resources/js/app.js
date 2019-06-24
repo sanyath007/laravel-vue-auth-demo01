@@ -44,12 +44,11 @@ Vue.use(VueSocialAuth, {
 
 import App from './components/App'
 import Welcome from './components/Welcome'
-import About from './components/About'
 import Contact from './components/Contact'
-import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import Register from './components/Register'
 
+import store from './store'
 // Vue.component('welcome', require('./components/Welcome.vue').default);
 
 /**
@@ -67,22 +66,9 @@ const router = new VueRouter({
 			component: Welcome
 		},
 		{
-			path: '/about',
-			name: 'about',
-			component: About
-		},
-		{
 			path: '/contact',
 			name: 'contact',
 			component: Contact
-		},
-		{
-			path: '/dashboard',
-			name: 'dashboard',
-			component: Dashboard,
-			meta: {
-				auth: true
-			}
 		},
 		{
 			path: '/login',
@@ -105,31 +91,6 @@ const router = new VueRouter({
 	],
 });
 
-const store = new Vuex.Store({
-	state: {
-		counter: 0,
-		numbers: [1,2,3]
-	},
-	mutations: {
-		INCREMENT (state) {
-			state.counter++
-		},
-		ADD_NUMBER(state, payload) {
-			state.numbers.push(payload)
-		}
-	},
-	actions: {
-		addNumber(context, number) {
-			context.commit("ADD_NUMBER", number)
-		}
-	},
-	getters: {
-		getNumbers(state) {
-			return state.numbers
-		}
-	}
-})
-
 // Vue.use(require('@websanova/vue-auth'), {
 // 	auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
 // 	http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
@@ -137,7 +98,7 @@ const store = new Vuex.Store({
 // })
 
 const app = new Vue({
-    el: '#app',
+  el: '#app',
 	components: { App },
 	data: {
 		title: ""

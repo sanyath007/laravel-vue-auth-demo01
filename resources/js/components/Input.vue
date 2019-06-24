@@ -1,9 +1,11 @@
 <template>
     <div class="m-b-md">
         <input
+            type="text"
             placeholder="Enter Text Here"
             v-model="temMessage"
             @keyup.enter="submit"
+            class="form-control"
         />
     </div>
 </template>

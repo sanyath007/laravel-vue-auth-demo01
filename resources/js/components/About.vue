@@ -1,8 +1,9 @@
 <template>
-    <div class="flex-center position-ref">
-        <div class="content">
-            <div class="title">{{ this.$root.$data.title }}</div>
-            This is About page.
+    <div class="container">
+        <div class="col-12">
+            <h1>{{ this.$root.$data.title }}</h1>
+            <h3>This is About page.</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus eligendi praesentium similique molestiae! Obcaecati modi praesentium illum vitae ipsum blanditiis, dicta perferendis minima reiciendis earum eius odit minus. Rem, delectus?</p>
             <Input @inputData="updateMessage" />
 
             <Result :msg=childData></Result>

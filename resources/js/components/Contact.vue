@@ -1,12 +1,35 @@
 <template>
-    <div class="flex-center position-ref">
-        <div class="content">
-            <div class="title">{{ this.$root.$data.title }}</div>
-            This is Contact page.
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h1>{{ this.$root.$data.title }}</h1>
+                <p v-if="currentUser">
+                    {{ currentUser }}
+                </p>
+
+                <form action="">
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" class="form-control" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="text" class="form-control" placeholder="Your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Message</label>
+                        <textarea class="form-control" placeholder="Your message..."></textarea>
+                    </div>
+
+                    <button class="btn btn-success btn-lg btn-block">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 </template>
 <script>
+    import { mapGetters } from 'vuex'
+
     export default {
         name: 'Contact',
         props: [
@@ -19,7 +42,12 @@
             }
         },
         mounted() {
-            this.$root.$data.title="Contact"
+            this.$root.$data.title="Contact Us"
+        },
+        computed: {
+            ...mapGetters({
+                currentUser: 'user/currentUser',
+            })
         },
         methods: {
             submit: function() {

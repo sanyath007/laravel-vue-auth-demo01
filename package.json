@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@websanova/vue-auth": "^2.21.14-beta",
+        "jwt-decode": "^2.2.0",
         "vue-axios": "^2.1.4",
         "vue-router": "^3.0.3",
         "vue-social-auth": "^1.3.9",
