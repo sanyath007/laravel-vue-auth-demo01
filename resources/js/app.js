@@ -11,13 +11,11 @@ import './bootstrap'
 // window.Vue = require('vue');
 // window.VueRouter = require('vue-router');
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueSocialAuth from 'vue-social-auth'
 
-Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 Vue.use(VueSocialAuth, {
@@ -43,53 +41,15 @@ Vue.use(VueSocialAuth, {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 import App from './components/App'
-import Welcome from './components/Welcome'
-import Contact from './components/Contact'
-import Login from './components/Login'
-import Register from './components/Register'
 
 import store from './store'
-// Vue.component('welcome', require('./components/Welcome.vue').default);
+import router from './router'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-const router = new VueRouter({
-	mode: 'history',
-	routes: [
-		{
-			path: '/',
-			name: 'home',
-			component: Welcome
-		},
-		{
-			path: '/contact',
-			name: 'contact',
-			component: Contact
-		},
-		{
-			path: '/login',
-			name: 'login',
-			component: Login,
-			meta: {
-				auth: false
-			}
-		},
-		{
-			path: '/register',
-			name: 'register',
-			component: Register,
-			meta: {
-				auth: false
-			}
-		},
-		// otherwise redirect to home
-		{ path: '*', redirect: '/' }
-	],
-});
 
 // Vue.use(require('@websanova/vue-auth'), {
 // 	auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
